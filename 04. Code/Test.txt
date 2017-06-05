@@ -1,0 +1,5 @@
+Welcome To Node.js
+and the use of the MEAN Stack. The MEAN
+stack includes MongoDB, Express, AngularJS
+and Node.js
+ - writing this string

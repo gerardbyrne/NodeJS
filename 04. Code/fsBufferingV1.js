@@ -1,0 +1,22 @@
+// Declare a variable to hold the fs module
+var filesystem = require('fs');
+
+// Call the readFile method from the fs module telling the method
+// the name of the file, the encoding type and a callback method 
+// that handles an error and the data received.
+// A callback function is simply a function we pass into another 
+// function so that the function can call on it at a later time. 
+// Callbacks are commonly seen in asynchronous APIs when the API call 
+// returns immediately because it is asynchronous, so we pass a function into 
+// it that the API can call when it's done performing its asynchronous task.
+filesystem.readFile('fsBufferingV1.txt', function(errorreceived, datareceived) 
+{  
+    if (errorreceived) 
+    {
+    	throw errorreceived;
+    }
+	else
+	{
+		console.log(datareceived);   		
+	}
+});

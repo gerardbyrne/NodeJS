@@ -1,0 +1,123 @@
+<!-- HTML5 JavaScript API DRAG AND DROP-->
+<!--SLIDES 92 - 101 -->
+<!DOCTYPE html>
+
+<!--PART 1 -->
+<html>
+<head>
+<style>
+	.droptarget {
+					float: left; 
+					width: 200px; 
+					height:100px;
+					margin: 15px;
+					padding: 10px;
+					border: 1px solid #ff0000;
+				}
+</style>
+</head>
+
+
+<!--PART 2 Just add below the last part -->
+<p>Drag the p element back and forth between the two rectangles:</p>
+
+<div class="droptarget">
+  <p draggable="true" id="dragtarget">Drag me to the other box</p>
+</div>
+
+<div class="droptarget">
+  <p draggable="true" id="dragtarget1"></p>
+</div>
+
+<!--PART 3 Just add below the last part -->
+<p style="clear:both;"><strong>Note:</strong> drag events are not supported in Internet Explorer 8 and earlier versions or Safari 5.1 and earlier versions.</p>
+<p id="demo"></p>
+
+
+<!--PART 4 Just add below the last part -->
+<script>
+/* Events fired on the drag target
+This is a listener on the drag start */
+
+document.addEventListener("dragstart", function(event) 
+		{
+			// The dataTransfer.setData() method sets the data type and the value of the dragged data
+			// We can set and get data
+			// The target is the paragraph with an id called dragtarget as this is what 
+			// is being dragged and initiated the dragstart
+			// Text is going to be the id of this target which is dragtarget
+			// dataTransfer is like our clipboard
+			// We use the setter setData
+			event.dataTransfer.setData("Text", event.target.id);
+			
+			// Output some text when starting to drag the p element
+			document.getElementById("demo").innerHTML = "Started to drag the p element.";
+			
+			// Change the opacity of the draggable element
+			event.target.style.opacity = "0.4";
+		});
+
+<!--PART 5 Just add below the last part -->
+// While dragging the p element, change the color of the output text
+document.addEventListener("drag", function(event) 
+		{
+			document.getElementById("demo").style.color = "red";
+		});		
+		
+<!--PART 6 Just add below the last part -->
+// Output some text when finished dragging the p element and reset the opacity
+document.addEventListener("dragend", function(event) 
+		{
+			document.getElementById("demo").innerHTML = "Finished dragging the p element.";
+			event.target.style.opacity = "1";
+		});
+
+<!--PART 7 Just add below the last part -->
+/* Events fired on the drop target */
+// When the draggable p element enters the droptarget, change the DIVS's border style
+document.addEventListener("dragenter", function(event) 
+		{
+			if ( event.target.className == "droptarget" ) {
+				event.target.style.border = "3px solid blue";
+			}
+		});
+
+<!--PART 8 Just add below the last part -->		
+// By default, data/elements cannot be dropped in other elements. 
+// To allow a drop, we must prevent the default handling of the element
+document.addEventListener("dragover", function(event) 
+	{
+		event.preventDefault();
+	});
+
+<!--PART 9 Just add below the last part -->
+// When the draggable p element leaves the droptarget, reset the DIVS's border style
+document.addEventListener("dragleave", function(event) 
+		{
+			if ( event.target.className == "droptarget" ) {
+				event.target.style.border = "3px solid lime";
+			}
+		});
+		
+<!--PART 10 Just add below the last part -->
+
+/* On drop - Prevent the browser default handling of the data (default is open as link on drop)
+   Reset the color of the output text and DIV's border color
+   Get the dragged data with the dataTransfer.getData() method
+   The dragged data is the id of the dragged element ("drag1")
+   Append the dragged element into the drop element
+*/
+document.addEventListener("drop", function(event) 
+	{
+		event.preventDefault();
+		if ( event.target.className == "droptarget" ) {
+			document.getElementById("demo").style.color = "";
+			event.target.style.border = "";
+			var data = event.dataTransfer.getData("Text");
+			event.target.appendChild(document.getElementById(data));
+		}
+	});
+</script>
+
+</body>
+</html>		
